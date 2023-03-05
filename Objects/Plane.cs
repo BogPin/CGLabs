@@ -13,9 +13,9 @@ namespace CGLabs.Objects
             Vector = vector;
         }
         
-        public bool Trace(Vector vector)
+        public Point Trace(Vector vector)
         {
-            return false;
+            return null;
         }
     }
 }

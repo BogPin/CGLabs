@@ -11,9 +11,9 @@ namespace CGLabs.Objects
             Center = center;
         }
         
-        public bool Trace(Vector vector)
+        public Point Trace(Vector vector)
         {
-            return false;
+            return null;
         }
     }
 }

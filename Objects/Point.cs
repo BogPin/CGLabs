@@ -11,5 +11,9 @@ namespace CGLabs.Objects
             Z = z;
         }
         
+        public static Vector operator -(Point a, Point b)
+        {
+            return new Vector(a.X - b.X, a.Y - b.Y, a.Z - b.Z);
+        }
     }
 }

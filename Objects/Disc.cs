@@ -1,3 +1,5 @@
+using CGLabs.Interfaces;
+
 namespace CGLabs.Objects
 {
     public class Disc : CGLabs.Interfaces.ITraceble
@@ -13,9 +15,9 @@ namespace CGLabs.Objects
             Normal = normal;
         }
         
-        public bool Trace(Vector vector)
+        public Point Trace(Vector vector)
         {
-            return false;
+            return null;
         }
     }
 }
