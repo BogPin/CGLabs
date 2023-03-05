@@ -17,6 +17,11 @@ namespace CGLabs.Objects
         {
             return new Vector(X + vector.X, Y + vector.Y, Z + vector.Z);
         }
+
+        public float DotProduct(Vector vector)
+        {
+            return X * vector.X + Y * vector.Y + Z * vector.Z;
+        }
         
         public Vector Sub(Vector vector)
         {
