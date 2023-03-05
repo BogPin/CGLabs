@@ -27,15 +27,16 @@ namespace CGLabs.Objects
         {
             return (float)Math.Sqrt(Math.Pow(X, 2) + Math.Pow(Y, 2) + Math.Pow(Z, 2));
         }
+
         public Vector Normalize()
         {
             var length = GetLength();
             return new Vector(X / length, Y / length, Z / length);
         }
+
         public override string ToString()
         {
             return $"({X}, {Y}, {Z})";
         }
-        
     }
 }

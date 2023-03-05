@@ -12,6 +12,7 @@ namespace CGLabs.Objects
             Center = center;
             Normal = normal;
         }
+        
         public bool Trace(Vector vector)
         {
             return false;

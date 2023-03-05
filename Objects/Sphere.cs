@@ -10,6 +10,7 @@ namespace CGLabs.Objects
             R = r;
             Center = center;
         }
+        
         public bool Trace(Vector vector)
         {
             return false;
