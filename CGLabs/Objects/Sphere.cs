@@ -14,19 +14,12 @@ namespace CGLabs.Objects
         
         public bool Trace(Ray ray)
         {
-            Vector oc = Center - ray.Origin;
-            float proj = oc.DotProduct(ray.Direction);
-            if (proj < 0.0) {
-                return false;
-            }
-            float ocLength = oc.GetLength();
-            float d = (proj * proj) - (ocLength * ocLength);
-            float r2 = R * R;
-            if (d > r2) {
-                return false;
-            }
-
-            return true;
-        }
+            Vector oc = ray.Origin - Center;
+            float a = ray.Direction.DotProduct(ray.Direction);
+            float b = ((float)(oc.DotProduct(ray.Direction) * 2.0));
+            float c = oc.DotProduct(oc) - R * R;
+            float discr = b * b - 4 * a * c;
+            return discr > 0;
+        }   
     }
 }
