@@ -15,7 +15,7 @@ namespace CGLabs.Objects
         public Camera(Point at, Vector direction, float fov, int width, int height)
         {
             At = at;
-            Direction = width / 2 / (float)Math.Tan(Fov / 2) * direction;
+            Direction = width / 2 / (float)Math.Tan(fov / 2) * direction;
             Fov = fov;
             Width = width;
             Height = height;

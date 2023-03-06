@@ -5,13 +5,14 @@ namespace CGLabs
 {
     class Program
     {
-        private const int width = 100, height = 20;
+        private const int width = 80, height = 25;
         static void Main(string[] args)
         {
-            var fov = (float)(60 / 180 * Math.PI);
-            var cam = new Camera(new Point(0, 0, 0), new Vector(0, 0, 1), fov, width, height);
+            float fovDeg = 60;
+            var fovRad = (float)(fovDeg / 180 * Math.PI);
+            var cam = new Camera(new Point(0, 0, 0), new Vector(0, 0, 1), fovRad, width, height);
             var objects = new CGLabs.Interfaces.ITraceble[] {
-                new Sphere(3, new Point(0, 0, 2))
+                new Disc(2, new Point(1, 0, 5), new Normal(0, 0, 1))
             };
             var light = new LightSource(0, -1, 0);
             for (var i = 0; i < cam.Height; i++) {
