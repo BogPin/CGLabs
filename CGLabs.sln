@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CGLabs", "CGLabs\CGLabs.csproj", "{4379E844-9146-49B6-B55D-3ADAF9C1E733}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CGLabsTest", "CGLabsTest\CGLabsTest.csproj", "{BC4E451F-66A5-4F31-8449-16A38DD3F71F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CGLabsTest", "CGLabsTest\CGLabsTest.csproj", "{BFCF3ED2-8F36-49A3-97C1-581DDCEAA141}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,9 +14,9 @@ Global
 		{4379E844-9146-49B6-B55D-3ADAF9C1E733}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4379E844-9146-49B6-B55D-3ADAF9C1E733}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4379E844-9146-49B6-B55D-3ADAF9C1E733}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BC4E451F-66A5-4F31-8449-16A38DD3F71F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BC4E451F-66A5-4F31-8449-16A38DD3F71F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BC4E451F-66A5-4F31-8449-16A38DD3F71F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BC4E451F-66A5-4F31-8449-16A38DD3F71F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFCF3ED2-8F36-49A3-97C1-581DDCEAA141}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFCF3ED2-8F36-49A3-97C1-581DDCEAA141}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFCF3ED2-8F36-49A3-97C1-581DDCEAA141}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFCF3ED2-8F36-49A3-97C1-581DDCEAA141}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
