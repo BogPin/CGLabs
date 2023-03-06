@@ -1,7 +1,14 @@
 namespace CGLabs.Objects
 {
-    public class Ray : Vector
+    public class Ray
     {
-        public Ray(float x, float y, float z) : base(x, y, z) {}
+        public Point Origin { get; set; }
+        public Vector Direction { get; set; }
+
+        public Ray(Point origin, Vector direction)
+        {
+            Origin = origin;
+            Direction = direction;
+        }
     }
 }
