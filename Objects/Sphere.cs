@@ -1,5 +1,6 @@
 namespace CGLabs.Objects
 {
+    using System;
     public class Sphere : CGLabs.Interfaces.ITraceble
     {
         public float R;
@@ -11,9 +12,21 @@ namespace CGLabs.Objects
             Center = center;
         }
         
-        public Point Trace(Vector vector)
+        public bool Trace(Ray ray)
         {
-            return null;
+            Vector oc = Center - ray.Origin;
+            float projectionLength = oc.DotProduct(ray.Direction);
+            if (projectionLength < 0.0) {
+                return false;
+            }
+            float ocLength = oc.GetLength();
+            float d = (projectionLength * projectionLength) - (ocLength * ocLength);
+            float r2 = R * R;
+            if (d > r2) {
+                return false;
+            }
+
+            return true;
         }
     }
 }

@@ -4,6 +4,6 @@ namespace CGLabs.Interfaces
 {
     public interface ITraceble
     {
-        public Point Trace(Vector vector);
+        public bool Trace(Ray ray);
     }
 }
