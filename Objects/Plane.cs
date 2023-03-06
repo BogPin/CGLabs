@@ -1,5 +1,6 @@
 namespace CGLabs.Objects
 {
+    using System;
     public class Plane : CGLabs.Interfaces.ITraceble
     {
         public Normal Normal;
@@ -13,9 +14,18 @@ namespace CGLabs.Objects
             Vector = vector;
         }
         
-        public Point Trace(Vector vector)
+        public bool Trace(Ray ray)
         {
-            return null;
+            float dn = ray.Direction.DotProduct(Normal);
+            if (Math.Abs(dn) < 1e-6) {
+                return false;
+            }
+            float oiLength = Normal.DotProduct(Point - ray.Origin) / dn;
+            if (oiLength < 0.0) {
+                return false;
+            }
+
+            return true;
         }
     }
 }
