@@ -16,7 +16,7 @@ namespace CGLabs
             var light = new LightSource(0, -1, 0);
             for (var i = 0; i < cam.Height; i++) {
                 for (var j = 0; j < cam.Width; j++) {
-                    var vector = cam.GetVector(j, i);
+                    var vector = cam.GetRay(j, i);
                     Point point = null;
                     foreach (var obj in objects)
                     {

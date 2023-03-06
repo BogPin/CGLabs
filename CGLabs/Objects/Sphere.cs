@@ -3,8 +3,8 @@ namespace CGLabs.Objects
     using System;
     public class Sphere : CGLabs.Interfaces.ITraceble
     {
-        public float R;
-        public Point Center;
+        public float R { get; set; }
+        public Point Center { get; set; }
 
         public Sphere(float r, Point center)
         {

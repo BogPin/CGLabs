@@ -5,9 +5,9 @@ namespace CGLabs.Objects
     using System;
     public class Disc : CGLabs.Interfaces.ITraceble
     {
-        public float R;
-        public Point Center;
-        public Normal Normal;
+        public float R { get; set; }
+        public Point Center { get; set; }
+        public Normal Normal { get; set; }
 
         public Disc(float r, Point center, Normal normal)
         {

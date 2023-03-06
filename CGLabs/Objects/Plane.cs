@@ -3,9 +3,9 @@ namespace CGLabs.Objects
     using System;
     public class Plane : CGLabs.Interfaces.ITraceble
     {
-        public Normal Normal;
-        public Point Point;
-        public Vector Vector;
+        public Normal Normal { get; set; }
+        public Point Point { get; set; }
+        public Vector Vector { get; set; }
 
         public Plane(Normal normal, Point point, Vector vector)
         {
