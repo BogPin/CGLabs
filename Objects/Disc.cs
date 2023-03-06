@@ -2,6 +2,7 @@ using CGLabs.Interfaces;
 
 namespace CGLabs.Objects
 {
+    using System;
     public class Disc : CGLabs.Interfaces.ITraceble
     {
         public float R;
@@ -15,9 +16,20 @@ namespace CGLabs.Objects
             Normal = normal;
         }
         
-        public Point Trace(Vector vector)
+        public bool Trace(Ray ray)
         {
-            return null;
+            float ndDot = ray.Direction.DotProduct(Normal);
+            if (Math.Abs(ndDot) < 1e-6) {
+                return false;
+            }
+            float t = Normal.DotProduct(Center - ray.Origin) / ndDot;
+            Point intersectionPoint = ray.Origin + t * ray.Direction;
+            float icLength = (intersectionPoint - Center).GetLength();
+            if (icLength > R) {
+                return false;
+            }
+
+            return true;
         }
     }
 }
