@@ -5,7 +5,7 @@ namespace CGLabs
 {
     class Program
     {
-        private const int width = 20, height = 20;
+        private const int width = 100, height = 20;
         static void Main(string[] args)
         {
             var fov = (float)(60 / 180 * Math.PI);
@@ -16,17 +16,20 @@ namespace CGLabs
             var light = new LightSource(0, -1, 0);
             for (var i = 0; i < cam.Height; i++) {
                 for (var j = 0; j < cam.Width; j++) {
-                    var vector = cam.GetRay(j, i);
-                    Point point = null;
+                    var ray = cam.GetRay(j, i);
+                    var traced = false;
                     foreach (var obj in objects)
                     {
-                        point = obj.Trace(vector);
-                        if (point != null) break;
+                        if (obj.Trace(ray)) {
+                            traced = true;
+                            break;
+                        }
                     }
                     float brightness = 0;
-                    if (point != null) {
-                        var vec1 = cam.At - point;
-                        brightness = vec1.Normalize().DotProduct(-light.Normalize());
+                    if (traced) {
+                        var vec1 = (-ray.Direction).Normalize();
+                        var vec2 = (-light).Normalize();
+                        brightness = vec1.DotProduct(vec2);
                     }
                     char ch;
                     if (brightness <= 0)
