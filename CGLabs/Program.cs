@@ -5,32 +5,34 @@ namespace CGLabs
 {
     class Program
     {
-        private const int width = 80, height = 25;
+        private const float width = 135, height = 35;
+        private const float halfWidth = width / 2, halfHeight = height / 2;
         static void Main(string[] args)
         {
             float fovDeg = 60;
             var fovRad = (float)(fovDeg / 180 * Math.PI);
             var cam = new Camera(new Point(0, 0, 0), new Vector(0, 0, 1), fovRad, width, height);
             var objects = new CGLabs.Interfaces.ITraceble[] {
-                new Disc(2, new Point(1, 0, 5), new Normal(0, 0, 1))
+                new Disc(1, new Point(3, 0, 10), new Normal(1, 0, 0)),
+                new Sphere(1, new Point(0, 0, 10))
             };
-            var light = new LightSource(0, -1, 0);
-            for (var i = 0; i < cam.Height; i++) {
-                for (var j = 0; j < cam.Width; j++) {
-                    var ray = cam.GetRay(j, i);
-                    var traced = false;
+            var light = new LightSource(1, -1, 1);
+            for (var i = 0; i < height; i++) {
+                for (var j = 0; j < width; j++) {
+                    var ray = cam.GetRay((j - halfWidth) / halfWidth, (halfHeight - i) / halfHeight);
+                    Point point = null;
+                    Vector normal = null;
                     foreach (var obj in objects)
                     {
-                        if (obj.Trace(ray)) {
-                            traced = true;
+                        point = obj.Trace(ray);
+                        if (point != null) {
+                            normal = obj.GetPointNormal(point, ray.Origin);
                             break;
                         }
                     }
                     float brightness = 0;
-                    if (traced) {
-                        var vec1 = (-ray.Direction).Normalize();
-                        var vec2 = (-light).Normalize();
-                        brightness = vec1.DotProduct(vec2);
+                    if (point != null) {
+                        brightness = light.DotProduct(normal);
                     }
                     char ch;
                     if (brightness <= 0)

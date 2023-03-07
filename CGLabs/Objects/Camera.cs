@@ -6,26 +6,31 @@ namespace CGLabs.Objects
     {
         public Point At { get; set; }
         public Vector Direction { get; set; }
-        public int Width { get; set; }
-        public int Height { get; set; }
         public float Fov { get; set; }
-        public float CenterX { get; set; }
-        public float CenterY { get; set; }
+        public int ScreenWidth { get; set; }
+        public int ScreenHeight { get; set; }
+        public float ScreenHalfWidth { get; set; }
+        public float ScreenHalfHeight { get; set; }
 
-        public Camera(Point at, Vector direction, float fov, int width, int height)
+        public Camera(Point at, Vector direction, float fov, float width, float height)
         {
             At = at;
-            Direction = width / 2 / (float)Math.Tan(fov / 2) * direction;
+            Direction = direction.Normalize();
             Fov = fov;
-            Width = width;
-            Height = height;
-            CenterX = width / 2;
-            CenterY = height / 2;
+            ScreenHalfWidth = (float)Math.Tan(fov / 2);
+            ScreenHalfHeight = ScreenHalfWidth * height / width;
         }
 
-        public Ray GetRay(float x, float y)
+        public Ray GetRay(float normalizedDeltaX, float normalizedDeltaY)
         {
-            return new Ray(At, Direction + new Vector(x - CenterX, CenterY - y, 0));
+            return new Ray(
+                At,
+                new Vector(
+                    normalizedDeltaX * ScreenHalfWidth,
+                    normalizedDeltaY * ScreenHalfHeight,
+                    0
+                ) + Direction
+            );
         }
     }
 }
