@@ -28,7 +28,7 @@ namespace CGLabs.Objects
 
         public Vector GetPointNormal(Point intersectionPoint)
         {
-            throw new NotImplementedException();
+            return (intersectionPoint - Center).Normalize();
         }  
     }
 }
