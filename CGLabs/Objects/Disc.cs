@@ -31,7 +31,7 @@ namespace CGLabs.Objects
             return intersectionPoint;
         }
 
-        public Vector GetPointNormal(Point intersetionPoint)
+        public Vector GetPointNormal(Point intersectionPoint, Point rayOrigin)
         {
             return Normal;
         }
