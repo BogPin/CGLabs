@@ -12,7 +12,7 @@ namespace CGLabs.Objects
             Center = center;
         }
         
-        public bool Trace(Ray ray)
+        public Point Trace(Ray ray)
         {
             Vector oc = ray.Origin - Center;
             float a = ray.Direction.DotProduct(ray.Direction);
@@ -20,6 +20,11 @@ namespace CGLabs.Objects
             float c = oc.DotProduct(oc) - R * R;
             float discr = b * b - 4 * a * c;
             return discr > 0;
-        }   
+        }
+
+        public Vector GetPointNormal(Point intersectionPoint)
+        {
+            throw new NotImplementedException();
+        }  
     }
 }

@@ -14,18 +14,24 @@ namespace CGLabs.Objects
             Vector = vector;
         }
         
-        public bool Trace(Ray ray)
+        public Point Trace(Ray ray)
         {
             float dn = ray.Direction.DotProduct(Normal);
             if (Math.Abs(dn) < 1e-6) {
-                return false;
+                return null;
             }
-            float oiLength = Normal.DotProduct(Point - ray.Origin) / dn;
-            if (oiLength < 0.0) {
-                return false;
+            float t = Normal.DotProduct(Point - ray.Origin) / dn;
+            Point intersectionPoint = ray.Origin + t * ray.Direction;
+            if (t < 0.0) {
+                return null;
             }
 
-            return true;
+            return intersectionPoint;
+        }
+
+        public Vector GetPointNormal(Point intersectionPoint)
+        {
+            return Normal;
         }
     }
 }

@@ -16,20 +16,24 @@ namespace CGLabs.Objects
             Normal = normal;
         }
         
-        public bool Trace(Ray ray)
+        public Point Trace(Ray ray)
         {
             float ndDot = ray.Direction.DotProduct(Normal);
             if (Math.Abs(ndDot) < 1e-6) {
-                return false;
+                return null;
             }
             float t = Normal.DotProduct(Center - ray.Origin) / ndDot;
             Point intersectionPoint = ray.Origin + t * ray.Direction;
             float icLength = (intersectionPoint - Center).GetLength();
             if (icLength > R) {
-                return false;
+                return null;
             }
+            return intersectionPoint;
+        }
 
-            return true;
+        public Vector GetPointNormal(Point intersetionPoint)
+        {
+            return Normal;
         }
     }
 }
