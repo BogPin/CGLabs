@@ -14,12 +14,16 @@ namespace CGLabs.Objects
         
         public Point Trace(Ray ray)
         {
-            Vector oc = ray.Origin - Center;
-            float a = ray.Direction.DotProduct(ray.Direction);
-            float b = ((float)(oc.DotProduct(ray.Direction) * 2.0));
-            float c = oc.DotProduct(oc) - R * R;
-            float discr = b * b - 4 * a * c;
-            return discr > 0;
+            Vector rd = ray.Direction.Normalize();
+            float t = (Center - ray.Origin).DotProduct(rd);
+            Point p = ray.Origin + t * rd;
+            float y = (Center - p).GetLength();
+            if (y > R) {
+                return null;
+            }
+            float x = (float) Math.Sqrt(R * R - y * y);
+            Point intersectionPoint = ray.Origin + (t - x) * rd;
+            return intersectionPoint;
         }
 
         public Vector GetPointNormal(Point intersectionPoint)
