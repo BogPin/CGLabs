@@ -5,13 +5,11 @@ namespace CGLabs.Objects
     {
         public Normal Normal { get; set; }
         public Point Point { get; set; }
-        public Vector Vector { get; set; }
 
-        public Plane(Normal normal, Point point, Vector vector)
+        public Plane(Normal normal, Point point)
         {
             Normal = normal;
             Point = point;
-            Vector = vector;
         }
         
         public Point Trace(Ray ray)

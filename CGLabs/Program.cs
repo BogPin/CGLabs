@@ -13,10 +13,11 @@ namespace CGLabs
             var fovRad = (float)(fovDeg / 180 * Math.PI);
             var cam = new Camera(new Point(0, 0, 0), new Vector(0, 0, 1), fovRad, width, height);
             var objects = new CGLabs.Interfaces.ITraceble[] {
-                new Disc(1, new Point(3, 0, 10), new Normal(1, 0, 0)),
-                new Sphere(1, new Point(0, 0, 10))
+                new Disc(1, new Point(4, 0, 10), new Normal(1, 0, 0)),
+                new Sphere(1, new Point(2, 0, 10)),
+                new Plane(new Normal(1, 1, 0), new Point(-1, 0, 0))
             };
-            var light = new LightSource(1, -1, 1);
+            var light = new LightSource(1, -2, 1);
             for (var i = 0; i < height; i++) {
                 for (var j = 0; j < width; j++) {
                     var ray = cam.GetRay((j - halfWidth) / halfWidth, (halfHeight - i) / halfHeight);
