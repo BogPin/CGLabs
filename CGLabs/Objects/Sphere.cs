@@ -28,7 +28,9 @@ namespace CGLabs.Objects
 
         public Vector GetPointNormal(Point intersectionPoint, Point rayOrigin)
         {
-            return (intersectionPoint - Center).Normalize();
+            Vector normalToPoint = (intersectionPoint - Center).Normalize();
+            float t = (intersectionPoint - rayOrigin).DotProduct(normalToPoint);
+            return t < 0 ? -normalToPoint : normalToPoint;
         }  
     }
 }
