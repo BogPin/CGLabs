@@ -5,6 +5,6 @@ namespace CGLabs.Interfaces
     public interface ITraceble
     {
         public Point Trace(Ray ray);
-        public Vector GetPointNormal(Point intersectionPoint);
+        public Vector GetPointNormal(Point intersectionPoint, Point rayOrigin);
     }
 }
