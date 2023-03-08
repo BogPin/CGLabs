@@ -10,7 +10,7 @@ namespace CGLabsTest
         private Sphere MockSphere { get; set; } = null!;
 
         [SetUp]
-        public void Init()
+        public void InitSphere()
         {
             MockSphere = new Sphere(2F, new Point(3, 5, 0));
         }
