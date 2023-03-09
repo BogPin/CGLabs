@@ -21,19 +21,24 @@ namespace CGLabs
             for (var i = 0; i < height; i++) {
                 for (var j = 0; j < width; j++) {
                     var ray = cam.GetRay((j - halfWidth) / halfWidth, (halfHeight - i) / halfHeight);
-                    Point point = null;
-                    Vector normal = null;
+                    Point closestPoint = null;
+                    Vector closestNormal = null;
+                    var shortestDistance = float.MaxValue;
                     foreach (var obj in objects)
                     {
-                        point = obj.Trace(ray);
+                        var point = obj.Trace(ray);
                         if (point != null) {
-                            normal = obj.GetPointNormal(point, ray.Origin);
-                            break;
+                            var distance = (point - ray.Origin).GetLength();
+                            if (distance < shortestDistance) {
+                                closestPoint = point;
+                                closestNormal = obj.GetPointNormal(point, ray.Origin);
+                                shortestDistance = distance;
+                            }
                         }
                     }
                     float brightness = 0;
-                    if (point != null) {
-                        brightness = light.DotProduct(normal);
+                    if (closestPoint != null) {
+                        brightness = light.DotProduct(closestNormal);
                     }
                     char ch;
                     if (brightness <= 0)
