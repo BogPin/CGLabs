@@ -19,9 +19,9 @@ namespace CGLabsTest
         public void InitiateIntersectableRayAndDisc_ReturnsIntersection()
         {
             Ray ray = new Ray(new Point(0F, -4F, 0F), new Vector(1F, 0F, 0F));
-            Point expected = MockDisc.Trace(ray);
-            Point actual = new Point(4F, -4F, 0F);
-            expected.Should().BeEquivalentTo(actual, options => 
+            Point actual = MockDisc.Trace(ray);
+            Point expected = new Point(4F, -4F, 0F);
+            actual.Should().BeEquivalentTo(expected, options => 
                                 options.IncludingFields());
         }
 
@@ -29,18 +29,18 @@ namespace CGLabsTest
         public void InitiateNotIntersectableRayAndDisc_RayIsPerpendicularToNormal_ReturnsNull()
         {
             Ray ray = new Ray(new Point(0F, 0F, 0F), new Vector(0F, 0F, 1F));
-            Point expected = MockDisc.Trace(ray);
-            Point actual = null;
-            expected.Should().BeEquivalentTo(actual);
+            Point actual = MockDisc.Trace(ray);
+            Point expected = null;
+            actual.Should().BeEquivalentTo(expected);
         }
 
         [Test]
         public void InitiateNotIntersectableRayAndSphere_LengthFromCenterToRayIsBiggerThatRadius_ReturnsNull()
         {
             Ray ray = new Ray(new Point(0F, -4F, 0F), new Vector(1F, 0F, 1F));
-            Point expected = MockDisc.Trace(ray);
-            Point actual = null;
-            expected.Should().BeEquivalentTo(actual);
+            Point actual = MockDisc.Trace(ray);
+            Point expected = null;
+            actual.Should().BeEquivalentTo(expected);
         }
     }
 }

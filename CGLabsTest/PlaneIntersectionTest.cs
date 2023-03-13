@@ -19,9 +19,9 @@ namespace CGLabsTest
         public void InitiateIntersectableRayAndPlane_ReturnsIntersection()
         {
             Ray ray = new Ray(new Point(0F, 5F, 0F), new Vector(3F, 0F, 2F));
-            Point expected = MockPlane.Trace(ray);
-            Point actual = new Point(3F, 5F, 2F);
-            expected.Should().BeEquivalentTo(actual, options => 
+            Point actual = MockPlane.Trace(ray);
+            Point expected = new Point(3F, 5F, 2F);
+            actual.Should().BeEquivalentTo(expected, options => 
                                 options.IncludingFields());
         }
 
@@ -29,18 +29,18 @@ namespace CGLabsTest
         public void InitiateNotIntersectableRayAndSphere_RayIsPerpendicularToNormal_ReturnsNull()
         {
             Ray ray = new Ray(new Point(0F, 0F, 0F), new Vector(0F, 0F, 1F));
-            Point expected = MockPlane.Trace(ray);
-            Point actual = null;
-            expected.Should().BeEquivalentTo(actual);
+            Point actual = MockPlane.Trace(ray);
+            Point expected = null;
+            actual.Should().BeEquivalentTo(expected);
         }
 
         [Test]
         public void InitiateNotIntersectableRayAndSphere_RayIsOpositeToNormal_ReturnsNull()
         {
             Ray ray = new Ray(new Point(0F, 5F, 0F), new Vector(-1F, 0F, 0F));
-            Point expected = MockPlane.Trace(ray);
-            Point actual = null;
-            expected.Should().BeEquivalentTo(actual);
+            Point actual = MockPlane.Trace(ray);
+            Point expected = null;
+            actual.Should().BeEquivalentTo(expected);
         }
     }
 }
