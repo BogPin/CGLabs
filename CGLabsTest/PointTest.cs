@@ -4,6 +4,7 @@ using NUnit.Framework;
 
 namespace CGLabsTest
 {
+    [TestFixture]
     public class PointTest
     {
         [Test]

@@ -4,13 +4,9 @@ using FluentAssertions;
 
 namespace CGLabsTest
 {
-    public class Tests
+    [TestFixture]
+    public class VectorTest
     {
-        [SetUp]
-        public void Setup()
-        {
-        }
-
         [Test]
         public void DotProductTest()
         {
@@ -26,7 +22,6 @@ namespace CGLabsTest
             Vector vector = new Vector(3, 4, 0);
             var length = vector.GetLength();
             length.Should().Be(5F);
-
         }
 
         [Test]
@@ -72,7 +67,6 @@ namespace CGLabsTest
         [Test]
         public void OperotorMultiplyTest()
         {
-            
             Vector vector = new Vector(2, 6, -1);
             var res = 8 * vector;
             new Vector(16, 48,-8).Should().BeEquivalentTo(res, options => 
