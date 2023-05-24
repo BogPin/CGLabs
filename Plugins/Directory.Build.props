@@ -1,0 +1,7 @@
+<Project>
+  <PropertyGroup>
+    <OutputPath>..\..\..\PluginsDLLs\</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
+</Project>
