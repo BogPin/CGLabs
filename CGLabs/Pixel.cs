@@ -2,7 +2,6 @@ namespace CGLabs;
 
 public struct Pixel
 {
-
   public int R { get; }
   public int G { get; }
   public int B { get; }
