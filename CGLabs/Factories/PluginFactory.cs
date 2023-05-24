@@ -28,7 +28,7 @@ public class PluginFactory
   {
     foreach (var reader in _readers)
     {
-      var instance = (IImageReader)Activator.CreateInstance(reader);
+      var instance = (IImageReader)Activator.CreateInstance(reader)!;
       if (format.ToString() == instance.Format) return instance;
     }
     throw new Exception($"Not found reader for format {format}");
@@ -38,7 +38,7 @@ public class PluginFactory
   {
     foreach (var writer in _writers)
     {
-      var instance = (IImageWriter)Activator.CreateInstance(writer);
+      var instance = (IImageWriter)Activator.CreateInstance(writer)!;
       if (format.ToString() == instance.Format) return instance;
     }
     throw new Exception($"Not found reader for format {format}");
