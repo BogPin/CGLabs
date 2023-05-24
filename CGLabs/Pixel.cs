@@ -7,7 +7,7 @@ public struct Pixel
   public int G { get; }
   public int B { get; }
 
-  public Pixel(int r, int g, int b)
+  public Pixel(byte r, byte g, byte b)
   {
     R = r;
     G = g;
