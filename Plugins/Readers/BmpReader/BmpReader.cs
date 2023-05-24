@@ -1,6 +1,8 @@
 using CGLabs;
 using CGLabs.Interfaces;
 
+namespace BmpReaderNS;
+
 public class BmpReader : IImageReader
 {
     public string Format => "Bmp";
