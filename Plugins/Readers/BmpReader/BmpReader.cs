@@ -9,36 +9,42 @@ public class BmpReader : IImageReader
 
   public Pixel[,] ReadImage(byte[] fileContent)
   {
-    Pixel[,] pixels;
+    if (fileContent == null || fileContent.Length < 54)
+            throw new ArgumentException("Invalid file content");
 
-    byte[] header = new byte[54];
-    Array.Copy(fileContent, 0, header, 0, 54);
+        // Extract BMP header information
+        int pixelDataOffset = BitConverter.ToInt32(fileContent, 10);
+        int width = BitConverter.ToInt32(fileContent, 18);
+        int height = BitConverter.ToInt32(fileContent, 22);
+        int bitsPerPixel = BitConverter.ToInt16(fileContent, 28);
 
-    int width = BitConverter.ToInt32(header, 18);
-    int height = BitConverter.ToInt32(header, 22);
+        // Validate header information
+        if (pixelDataOffset < 54 || width <= 0 || height <= 0 || bitsPerPixel != 24)
+            throw new ArgumentException("Invalid BMP file format");
 
-    int rowSize = width * 3;
-    int padding = (4 - (rowSize % 4)) % 4;
-    int rowBytes = rowSize + padding;
+        int rowSize = ((width * bitsPerPixel + 31) / 32) * 4; // Row size in bytes
+        int pixelArraySize = rowSize * height;
 
-    byte[] pixelData = new byte[rowBytes * height];
-    Array.Copy(fileContent, 54, pixelData, 0, rowBytes * height);
+        if (fileContent.Length - pixelDataOffset < pixelArraySize)
+            throw new ArgumentException("Invalid BMP file format");
 
-    pixels = new Pixel[height, width];
+        Pixel[,] pixels = new Pixel[height, width];
 
-    for (int y = 0; y < height; y++)
-    {
-      for (int x = 0; x < width; x++)
-      {
-        int pixelOffset = (y * rowBytes) + (x * 3);
-        byte blue = pixelData[pixelOffset];
-        byte green = pixelData[pixelOffset + 1];
-        byte red = pixelData[pixelOffset + 2];
+        int pixelIndex = pixelDataOffset;
+        for (int y = height - 1; y >= 0; y--)
+        {
+            for (int x = 0; x < width; x++)
+            {
+                int b = fileContent[pixelIndex++];
+                int g = fileContent[pixelIndex++];
+                int r = fileContent[pixelIndex++];
+                pixels[y, x] = new Pixel((byte)r, (byte)g, (byte)b);
+            }
 
-        pixels[y, x] = new Pixel(red, green, blue);
-      }
-    }
+            int paddingBytes = rowSize - (width * 3);
+            pixelIndex += paddingBytes;
+        }
 
-    return pixels;
+        return pixels;
   }
 }
