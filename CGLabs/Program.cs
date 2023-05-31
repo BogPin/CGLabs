@@ -15,9 +15,11 @@ if (outputFileName == "")
   throw new Exception("not found --target argument");
 var outputFormat = outputFileName.Split('.')[1];
 
-var reader = pluginFactory.GetImageReader(inputFormat);
+var inputBytes = File.ReadAllBytes(inputFileName);
+
+var reader = pluginFactory.GetImageReader(inputBytes);
 var writer = pluginFactory.GetImageWriter(outputFormat);
 
-var pixels = reader.ReadImage(File.ReadAllBytes(inputFileName));
+var pixels = reader.ReadImage(inputBytes);
 
 File.WriteAllBytes(outputFileName, writer.WriteImage(pixels, int.Parse(maxColorValue)));

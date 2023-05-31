@@ -24,31 +24,13 @@ public class PluginFactory
     }
   }
 
-  // public IImageReader GetImageReader(string format)
-  // {
-  //   foreach (var reader in _readers)
-  //   {
-  //     var instance = (IImageReader)Activator.CreateInstance(reader)!;
-  //     if (format == instance.Format) {
-  //       return instance;
-  //     } else {
-
-  //     }
-
-  //   }
-  //   throw new Exception($"Not found reader for format {format}");
-  // }
-
   public IImageReader GetImageReader(byte[] fileContent)
   {
     foreach (var reader in _readers)
     {
       var instance = (IImageReader)Activator.CreateInstance(reader)!;
       if (instance.isValidFile(fileContent))
-      {
-        Console.WriteLine(instance);
         return instance;
-      }
     }
     throw new Exception("Not found reader for given file");
   }
@@ -61,6 +43,6 @@ public class PluginFactory
       if (format == instance.Format)
         return instance;
     }
-    throw new Exception($"Not found reader for format {format}");
+    throw new Exception($"Not found writer for format {format}");
   }
 }
