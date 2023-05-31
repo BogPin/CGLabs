@@ -1,13 +1,21 @@
 ﻿using CGLabs.Interfaces;
 using CGLabs;
+using System.Text;
 
 namespace PpmReaderNS;
 
 public class PpmReader : IImageReader
 {
   public string Format => "ppm";
+  private string PPM_MAGIC_NUMBER = "P3";
 
-  public Pixel[,] ReadImage(byte[] fileData)
+    public bool isValidFile(byte[] fileContent)
+    {
+        string content = Encoding.ASCII.GetString(fileContent);
+        return content.StartsWith(PPM_MAGIC_NUMBER);
+    }
+
+    public Pixel[,] ReadImage(byte[] fileData)
   {
     var str = System.Text.Encoding.Default.GetString(fileData);
 

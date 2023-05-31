@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Text;
 using CGLabs;
 using CGLabs.Interfaces;
 
@@ -6,8 +8,15 @@ namespace BmpReaderNS;
 public class BmpReader : IImageReader
 {
   public string Format => "bmp";
+  private string BMP_MAGIC_NUMBER = "BM";
 
-  public Pixel[,] ReadImage(byte[] fileContent)
+    public bool isValidFile(byte[] fileContent)
+    {
+        string content = Encoding.ASCII.GetString(fileContent);
+        return content.StartsWith(BMP_MAGIC_NUMBER);
+    }
+
+    public Pixel[,] ReadImage(byte[] fileContent)
   {
     if (fileContent == null || fileContent.Length < 54)
             throw new ArgumentException("Invalid file content");
