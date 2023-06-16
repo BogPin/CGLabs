@@ -1,0 +1,7 @@
+{
+   "tasks": [{
+      "name": "Check formatting",
+      "command": "dotnet",
+      "args": [ "csharpier", ".", "--check" ]
+  }]
+}

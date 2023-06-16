@@ -8,23 +8,23 @@ namespace CGLabs.Objects
   {
     public Camera Camera { get; set; }
     public LightSource LightSource { get; set; }
-    public List<ITraceble> Figures { get; set; }
+    public List<ITraceable> Figures { get; set; }
 
     public Scene(Camera camera, LightSource lightSource)
     {
       Camera = camera;
       LightSource = lightSource;
-      Figures = new List<ITraceble>();
+      Figures = new List<ITraceable>();
     }
 
-    public Scene(Camera camera, LightSource lightSource, List<ITraceble> figures)
+    public Scene(Camera camera, LightSource lightSource, List<ITraceable> figures)
     {
       Camera = camera;
       LightSource = lightSource;
       Figures = figures;
     }
 
-    public int AddFigure(ITraceble figure)
+    public int AddFigure(ITraceable figure)
     {
       Figures.Add(figure);
       return Figures.Count;
