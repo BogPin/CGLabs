@@ -33,7 +33,7 @@ public class WfObjReader
         Vertex sVertex = vertices[sVertexIndex - 1];
         Vertex thVertex = vertices[thVertexIndex - 1];
 
-        faces.Add(new TriangleFace(fVertex, sVertex, thVertex));
+        faces.Add(new TriangleFace(new List<Vertex> { fVertex, sVertex, thVertex }));
       }
     }
 

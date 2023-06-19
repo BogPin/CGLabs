@@ -1,3 +1,5 @@
+using CGLabs.Objects;
+
 namespace CGLabs;
 
 public class Vertex
@@ -13,5 +15,10 @@ public class Vertex
     Y = y;
     Z = z;
     Index = index;
+  }
+
+  public Point getPoint()
+  {
+    return new Point(X, Y, Z);
   }
 }
