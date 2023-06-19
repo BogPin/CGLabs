@@ -30,6 +30,12 @@ namespace CGLabs.Objects
       return Figures.Count;
     }
 
+    public int AddFigures(ITraceable[] figures)
+    {
+      Figures.Concat(figures);
+      return Figures.Count;
+    }
+
     public Vector TracePixel(int x, int y)
     {
       var ray = Camera.GetRay(x, y);
