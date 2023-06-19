@@ -32,6 +32,19 @@ namespace CGLabs.Objects
       return new Vector(a * b.X, a * b.Y, a * b.Z);
     }
 
+    public static Vector Cross(Vector a, Vector b)
+    {
+      float x = a.Y * b.Z - a.Z * b.Y;
+      float y = a.Z * b.X - a.X * b.Z;
+      float z = a.X * b.Y - a.Y * b.X;
+      return new Vector(x, y, z);
+    }
+
+    public static float Dot(Vector a, Vector b)
+    {
+      return a.X * b.X + a.Y * b.Y + a.Z * b.Z;
+    }
+
     public float DotProduct(Vector vector)
     {
       return X * vector.X + Y * vector.Y + Z * vector.Z;
