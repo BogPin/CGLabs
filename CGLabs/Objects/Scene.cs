@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using CGLabs.Interfaces;
 
 namespace CGLabs.Objects
@@ -17,11 +15,11 @@ namespace CGLabs.Objects
       Figures = new List<ITraceable>();
     }
 
-    public Scene(Camera camera, LightSource lightSource, List<ITraceable> figures)
+    public Scene(Camera camera, LightSource lightSource, IEnumerable<ITraceable> figures)
     {
       Camera = camera;
       LightSource = lightSource;
-      Figures = figures;
+      Figures = new List<ITraceable>(figures);
     }
 
     public int AddFigure(ITraceable figure)
@@ -30,16 +28,17 @@ namespace CGLabs.Objects
       return Figures.Count;
     }
 
-    public int AddFigures(ITraceable[] figures)
+    public int AddFigures(IEnumerable<ITraceable> figures)
     {
-      Figures.Concat(figures);
+      Figures = Figures.Concat(figures).ToList();
       return Figures.Count;
     }
 
-    public Vector TracePixel(int x, int y)
+    public (Point?, Vector?) TracePixel(int x, int y)
     {
       var ray = Camera.GetRay(x, y);
-      Vector closestNormal = null;
+      Point? closestIntersection = null;
+      Vector? normal = null;
       var shortestDistance = float.MaxValue;
       foreach (var obj in Figures)
       {
@@ -49,51 +48,51 @@ namespace CGLabs.Objects
           var distance = (point - ray.Origin).GetLength();
           if (distance < shortestDistance)
           {
-            closestNormal = obj.GetPointNormal(point, ray.Origin);
+            closestIntersection = point;
+            normal = obj.GetPointNormal(point, ray.Origin);
             shortestDistance = distance;
           }
         }
       }
-      return closestNormal;
+      return (closestIntersection, normal);
     }
 
-    public void Render()
+    public Point? TracePixelFirst(Ray ray)
     {
+      foreach (var obj in Figures)
+      {
+        var point = obj.Trace(ray);
+        if (point != null)
+        {
+          var distToIntersection = (point - ray.Origin).GetLength();
+          if (distToIntersection > 0.00001)
+            return point;
+        }
+      }
+      return null;
+    }
+
+    public byte[] Render(IImageWriter writer, int maxColorValue)
+    {
+      var pixels = new Pixel[Camera.PixelsHeight, Camera.PixelsWidth];
       for (var i = 0; i < Camera.PixelsHeight; i++)
       {
         for (var j = 0; j < Camera.PixelsWidth; j++)
         {
-          var closestNormal = TracePixel(j, i);
-          float brightness = 0;
-          if (closestNormal != null)
+          var pixelBrightness = 0f;
+          var (point, normal) = TracePixel(j, i);
+          if (point != null && normal != null)
           {
-            brightness += LightSource.DotProduct(closestNormal);
+            var pointToLightRay = new Ray(point, -LightSource);
+            var intersection = TracePixelFirst(pointToLightRay);
+            if (intersection == null)
+              pixelBrightness = LightSource.DotProduct(normal);
           }
-          char ch;
-          if (brightness <= 0)
-          {
-            ch = ' ';
-          }
-          else if (brightness < 0.2)
-          {
-            ch = '.';
-          }
-          else if (brightness < 0.5)
-          {
-            ch = '*';
-          }
-          else if (brightness < 0.8)
-          {
-            ch = '0';
-          }
-          else
-          {
-            ch = '#';
-          }
-          Console.Write(ch);
+          var val = (byte)Math.Round(pixelBrightness * 255, MidpointRounding.AwayFromZero);
+          pixels[i, j] = new Pixel(val, val, val);
         }
-        Console.WriteLine();
       }
+      return writer.ImageToBytes(pixels, maxColorValue);
     }
   }
 }

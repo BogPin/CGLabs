@@ -1,42 +1,43 @@
+using System.Globalization;
+using CGLabs.Objects;
+
 namespace CGLabs;
 
 public class WfObjReader
 {
-  public static List<TriangleFace> readObjFile(string pathToFile)
+  public static TriangleFace[] ReadObjFile(byte[] fileContent)
   {
-    List<Vertex> vertices = new List<Vertex>();
-    List<TriangleFace> faces = new List<TriangleFace>();
+    var vertices = new List<Vertex>();
+    var faces = new List<TriangleFace>();
 
-    string[] lines = File.ReadAllLines(pathToFile);
-    int vIndex = 1;
+    var lines = System.Text.Encoding.Default.GetString(fileContent).Split('\n');
+    var vIndex = 1;
 
-    foreach (string line in lines)
+    foreach (var line in lines)
     {
-      string[] parts = line.Split(" ");
-
+      var parts = line.Split(" ");
       if (parts[0] == "v")
       {
-        float x = float.Parse(parts[1]);
-        float y = float.Parse(parts[2]);
-        float z = float.Parse(parts[3]);
+        var x = float.Parse(parts[1], CultureInfo.InvariantCulture);
+        var y = float.Parse(parts[2], CultureInfo.InvariantCulture);
+        var z = float.Parse(parts[3], CultureInfo.InvariantCulture);
 
-        vertices.Add(new Vertex(x, y, z, vIndex));
-        vIndex++;
+        vertices.Add(new Vertex(x, y, z, vIndex++));
       }
       else if (parts[0] == "f")
       {
-        int fVertexIndex = int.Parse(parts[1]);
-        int sVertexIndex = int.Parse(parts[2]);
-        int thVertexIndex = int.Parse(parts[3]);
+        var fVertexIndex = int.Parse(parts[1].Split("//")[0]);
+        var sVertexIndex = int.Parse(parts[2].Split("//")[0]);
+        var thVertexIndex = int.Parse(parts[3].Split("//")[0]);
 
-        Vertex fVertex = vertices[fVertexIndex - 1];
-        Vertex sVertex = vertices[sVertexIndex - 1];
-        Vertex thVertex = vertices[thVertexIndex - 1];
+        var fVertex = vertices[fVertexIndex - 1];
+        var sVertex = vertices[sVertexIndex - 1];
+        var thVertex = vertices[thVertexIndex - 1];
 
         faces.Add(new TriangleFace(new List<Vertex> { fVertex, sVertex, thVertex }));
       }
     }
 
-    return faces;
+    return faces.ToArray();
   }
 }

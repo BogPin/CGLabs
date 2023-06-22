@@ -1,6 +1,5 @@
 using CGLabs.Objects;
 using FluentAssertions;
-using NUnit.Framework;
 
 namespace CGLabsTest
 {

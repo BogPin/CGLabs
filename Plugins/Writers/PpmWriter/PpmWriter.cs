@@ -8,7 +8,7 @@ public class PpmWriter : IImageWriter
 {
   public string Format => "ppm";
 
-  public byte[] WriteImage(Pixel[,] pixels, int maxColorValue)
+  public byte[] ImageToBytes(Pixel[,] pixels, int maxColorValue)
   {
     double colorCoef = maxColorValue / 255.0;
     StringBuilder sb = new StringBuilder();

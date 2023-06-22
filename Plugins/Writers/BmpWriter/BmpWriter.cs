@@ -7,7 +7,7 @@ public class BmpWriter : IImageWriter
 {
   public string Format => "bmp";
 
-  public byte[] WriteImage(Pixel[,] pixels, int maxColorValue)
+  public byte[] ImageToBytes(Pixel[,] pixels, int maxColorValue)
   {
     if (pixels == null || pixels.Length == 0)
       throw new ArgumentException("Invalid pixel data");

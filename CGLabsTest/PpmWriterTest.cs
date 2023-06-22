@@ -19,7 +19,7 @@ public class TestWriter
     PpmWriter ppmWriter = new PpmWriter();
 
     // Act
-    byte[] result = ppmWriter.WriteImage(pixels, maxColorValue);
+    byte[] result = ppmWriter.ImageToBytes(pixels, maxColorValue);
 
     // Assert
     byte[] expected = Encoding.ASCII.GetBytes(

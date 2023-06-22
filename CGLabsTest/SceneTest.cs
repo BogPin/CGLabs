@@ -1,7 +1,5 @@
-using NUnit.Framework;
 using CGLabs.Objects;
 using FluentAssertions;
-using System;
 
 namespace CGLabsTest
 {
@@ -18,14 +16,22 @@ namespace CGLabsTest
       var camera = new Camera(new Point(0, 0, 0), new Vector(0, 0, 1), fovRad, width, height);
       var light = new LightSource(0, -1, 0);
       var scene = new Scene(camera, light);
-      scene.AddFigure(new Sphere(1, new Point(0, 0, 12)));
-      scene.AddFigure(new Disc(1, new Point(0, 0, 8), new Normal(0, 1, -1)));
+      var list = new List<Vertex>();
+      list.Add(new Vertex(-1, -0.3f, 1, -1));
+      list.Add(new Vertex(0.5f, -0.3f, 1, -1));
+      list.Add(new Vertex(1, 1, 1, -1));
+      scene.AddFigure(new TriangleFace(list));
+      var list2 = new List<Vertex>();
+      list2.Add(new Vertex(-1, 0, 2, -1));
+      list2.Add(new Vertex(0, 0, 2, -1));
+      list2.Add(new Vertex(0.5f, 1, 2, -1));
+      scene.AddFigure(new TriangleFace(list2));
 
-      var normal = scene.TracePixel(70, 25);
+      var (point, normal) = scene.TracePixel(70, 25);
 
-      normal
+      point
         .Should()
-        .BeEquivalentTo(new Vector(0, -1, 1), options => options.ExcludingMissingMembers());
+        .BeEquivalentTo(new Point(0, 0, 1), options => options.ExcludingMissingMembers());
     }
   }
 }

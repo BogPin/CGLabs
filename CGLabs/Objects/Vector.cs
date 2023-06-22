@@ -65,5 +65,10 @@ namespace CGLabs.Objects
     {
       return $"({X}, {Y}, {Z})";
     }
+
+    public Point ToPoint()
+    {
+      return new Point(X, Y, Z);
+    }
   }
 }

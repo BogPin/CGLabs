@@ -22,5 +22,10 @@ namespace CGLabs.Objects
     {
       return new Vector(a.X - b.X, a.Y - b.Y, a.Z - b.Z);
     }
+
+    public Vector ToVector()
+    {
+      return new Vector(X, Y, Z);
+    }
   }
 }

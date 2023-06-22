@@ -1,6 +1,4 @@
-using CGLabs.Objects;
-
-namespace CGLabs;
+namespace CGLabs.Objects;
 
 public class Vertex
 {
@@ -17,8 +15,18 @@ public class Vertex
     Index = index;
   }
 
-  public Point getPoint()
+  public Point ToPoint()
   {
     return new Point(X, Y, Z);
+  }
+
+  public Vector ToVector()
+  {
+    return new Vector(X, Y, Z);
+  }
+
+  public override string ToString()
+  {
+    return $"{{x: {X}, y: {Y}, z: {Z}}}";
   }
 }

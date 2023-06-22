@@ -31,11 +31,12 @@ namespace CGLabs.Objects
     {
       var normalizedDeltaX = ((float)x - PixelsHalfWidth) / PixelsHalfWidth;
       var normalizedDeltaY = (PixelsHalfHeight - (float)y) / PixelsHalfHeight;
-      return new Ray(
-        At,
-        new Vector(normalizedDeltaX * ScreenHalfWidth, normalizedDeltaY * ScreenHalfHeight, 0)
-          + Direction
+      var vectorInScreenPlane = new Vector(
+        normalizedDeltaX * ScreenHalfWidth,
+        normalizedDeltaY * ScreenHalfHeight,
+        0
       );
+      return new Ray(At, (vectorInScreenPlane + Direction).Normalize());
     }
   }
 }
